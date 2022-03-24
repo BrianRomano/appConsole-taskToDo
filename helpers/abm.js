@@ -1,11 +1,15 @@
+// FILESYSTEM
 const fs = require("fs");
 
+// PATH DE DB
 const archivo = "./db/data.json";
 
+// GUARDAR DATOS EN JSON
 const guardarDB = (data) => {
   fs.writeFileSync(archivo, JSON.stringify(data));
 };
 
+// LEER LOS DATOS JSON
 const leerDB = () => {
   if (!fs.existsSync(archivo)) {
     return null;

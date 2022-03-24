@@ -1,15 +1,18 @@
 const Tarea = require("./tarea");
 
 class Tareas {
+  // LISTADO DE TAREAS - OBJETOS
   _listado = {};
 
   constructor() {
     this._listado = {};
   }
 
+  // OBTENER LISTADO DE TAREAS - ARRAY
   get listadoArr() {
     const listado = [];
 
+    // LISTADO DE TAREAS - ARRAY
     Object.keys(this._listado).forEach((key) => {
       const tarea = this._listado[key];
       listado.push(tarea);
@@ -18,23 +21,27 @@ class Tareas {
     return listado;
   }
 
+  // CARGAR ARCHIVO JSON
   cargarTareasFromArray(tareas) {
     tareas.forEach((tarea) => {
       this._listado[tarea.id] = tarea;
     });
   }
 
+  // CREAR TAREA Y GUARDAR ID PARA CADA TAREA EN EL LISTADO
   crearTarea(descripcion = "") {
     const tarea = new Tarea(descripcion);
     this._listado[tarea.id] = tarea;
   }
 
+  // ELIMINAR TAREA SI ES QUE EXISTE
   eliminarTarea(id) {
     if (this._listado[id]) {
       delete this._listado[id];
     }
   }
 
+  // MOSTRAR LISTADO COMPLETO Y SU ESTADO
   listadoCompleto() {
     this.listadoArr.forEach((tarea, index) => {
       const i = `${index + 1}. `.green;
@@ -49,7 +56,8 @@ class Tareas {
     });
   }
 
-  mostrarTareasRealizadasPendientes(realizada = true) {
+  // MOSTRAR TAREAS REALIZADAS Y PENDIENTES
+  mostrarTareasRealizadasPendientes(realizada) {
     let contadorIndice = 0;
 
     this.listadoArr.forEach((tarea) => {
@@ -75,6 +83,7 @@ class Tareas {
     });
   }
 
+  // CAMBIAR EL ESTADO DE LA TAREA
   cambiarEstadoTarea = (ids) => {
     ids.forEach((id) => {
       const tarea = this._listado[id];

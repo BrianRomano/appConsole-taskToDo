@@ -39,6 +39,7 @@ const preguntas = [
   },
 ];
 
+// MOSTRAR MENU Y OBTENER OPCION ELEGIDA
 const inquirerMenu = async () => {
   console.clear();
   console.log("=============================".blue);
@@ -49,6 +50,7 @@ const inquirerMenu = async () => {
   return opcion;
 };
 
+// PAUSAR EJECUCION
 const pausa = async () => {
   const pregunta = [
     {
@@ -61,6 +63,7 @@ const pausa = async () => {
   await inquirer.prompt(pregunta);
 };
 
+// OBTENER DESCRIPCION DE 'CREAR TAREA'
 const leerInput = async (message) => {
   const pregunta = [
     {
@@ -80,19 +83,21 @@ const leerInput = async (message) => {
   return descripcion;
 };
 
+// MOSTRAR TAREAS Y OBTENER ID DE TAREAS A ELIMINAR
 const listadoTareasEliminar = async (tareas) => {
   const choices = tareas.map((tarea, index) => {
     const idx = `${index + 1}.`.green;
 
     return {
       value: tarea.id,
-      name: `${idx} ${tarea.descripcion}`
+      name: `${idx} ${tarea.descripcion}`,
     };
   });
 
+  // OPCION PARA CANCELAR
   choices.unshift({
-    value: '0', 
-    name: `${"0. ".green }Salir`
+    value: "0",
+    name: `${"0. ".green}Salir`,
   });
 
   const pregunta = [
@@ -108,14 +113,15 @@ const listadoTareasEliminar = async (tareas) => {
   return id;
 };
 
-const mostrarListadoCheck= async (tareas) => {
+// CAMBIAR EL ESTADO DE LA TAREA
+const mostrarListadoCheck = async (tareas) => {
   const choices = tareas.map((tarea, index) => {
     const idx = `${index + 1}.`.green;
 
     return {
       value: tarea.id,
-      name: `${idx} ${tarea.descripcion}`, 
-      checked: (tarea.completadoEn) ? true : false 
+      name: `${idx} ${tarea.descripcion}`,
+      checked: tarea.completadoEn ? true : false,
     };
   });
 
@@ -132,6 +138,7 @@ const mostrarListadoCheck= async (tareas) => {
   return ids;
 };
 
+// MENSAJE DE CONFIRMACION
 const confirmar = async (message) => {
   const pregunta = [
     {
