@@ -2,9 +2,7 @@
 Aplicación de consola - Gestor de tareas
 <br>
 ## Instalación
-<hr>
 npm install
 <br>
-## Ejecución
-<hr>
+### Ejecución
 En consola: node app
