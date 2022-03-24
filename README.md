@@ -2,4 +2,4 @@
 npm install
 <br>
 ## Ejecución
-En consola: node app
+node app
