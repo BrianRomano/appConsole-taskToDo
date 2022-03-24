@@ -1,8 +1,5 @@
-# appConsole-taskToDo
-Aplicación de consola - Gestor de tareas
-<br>
-## Instalación
+# Instalación
 npm install
 <br>
-### Ejecución
+## Ejecución
 En consola: node app
