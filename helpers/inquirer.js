@@ -9,31 +9,31 @@ const preguntas = [
     choices: [
       {
         value: "1",
-        name: "1. Crear tarea",
+        name: `${"1.".blue} Crear tarea`,
       },
       {
         value: "2",
-        name: "2. Mostrar tareas",
+        name: `${"2.".blue} Mostrar tareas`,
       },
       {
         value: "3",
-        name: "3. Mostrar tareas completadas",
+        name: `${"3.".blue} Mostrar tareas realizadas`,
       },
       {
         value: "4",
-        name: "4. Mostrar tareas pendientes",
+        name: `${"4.".blue} Mostrar tareas pendientes`,
       },
       {
         value: "5",
-        name: "5. Completar tarea(s)",
+        name: `${"5.".blue} Finalizar tarea(s)`,
       },
       {
         value: "6",
-        name: "6. Borrar tarea",
+        name: `${"6.".blue} Borrar tarea`,
       },
       {
         value: "7",
-        name: "7. Salir",
+        name: `${"7.".blue} Salir`,
       },
     ],
   },
@@ -41,9 +41,9 @@ const preguntas = [
 
 const inquirerMenu = async () => {
   console.clear();
-  console.log("=============================".green);
+  console.log("=============================".blue);
   console.log("    Seleccione una opción ");
-  console.log("=============================\n".green);
+  console.log("=============================\n".blue);
 
   const { opcion } = await inquirer.prompt(preguntas);
   return opcion;
@@ -80,8 +80,51 @@ const leerInput = async (message) => {
   return descripcion;
 };
 
+const listadoTareasEliminar = async (tareas) => {
+  const choices = tareas.map((tarea, index) => {
+    const idx = `${index + 1}.`.green;
+
+    return {
+      value: tarea.id,
+      name: `${idx} ${tarea.descripcion}`
+    };
+  });
+
+  choices.unshift({
+    value: '0', 
+    name: `${"0. ".green }Salir`
+  });
+
+  const pregunta = [
+    {
+      type: "list",
+      name: "id",
+      message: "Borrar",
+      choices,
+    },
+  ];
+
+  const { id } = await inquirer.prompt(pregunta);
+  return id;
+};
+
+const confirmar = async (message) => {
+  const pregunta = [
+    {
+      type: "confirm",
+      name: "ok",
+      message,
+    },
+  ];
+
+  const { ok } = await inquirer.prompt(pregunta);
+  return ok;
+};
+
 module.exports = {
   inquirerMenu,
   pausa,
   leerInput,
+  listadoTareasEliminar,
+  confirmar,
 };
