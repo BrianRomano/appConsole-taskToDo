@@ -5,6 +5,7 @@ const {
   pausa,
   leerInput,
   listadoTareasEliminar,
+  mostrarListadoCheck,
   confirmar,
 } = require("./helpers/inquirer");
 const Tareas = require("./models/tareas");
@@ -37,7 +38,10 @@ const main = async () => {
       case "4":
         tareas.mostrarTareasRealizadasPendientes(false);
         break;
-
+      case "5":
+        const ids = await mostrarListadoCheck(tareas.listadoArr);
+        tareas.cambiarEstadoTarea(ids);
+        break;
       case "6":
         const id = await listadoTareasEliminar(tareas.listadoArr);
         if (id !== "0") {
